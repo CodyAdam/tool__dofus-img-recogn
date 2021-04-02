@@ -1,18 +1,20 @@
-Name := "HDV Eater"
-; CORE
-Gui, Core:New, , %Name%
+CoreName := "Auction Devourer"
+Gui, Core:New, +AlwaysOnTop, %CoreName%
 
+; #################################################################
 ; Settings
+
 Gui, Font, Bold
 Gui, Add, Text, x10 y10, Settings
 Gui, Font, Norm
 
 Gui, Add, DropDownList, gChangeServer vserver, Temporis 1|Temporis 2|Temporis 3|Temporis 4|Temporis 5
-Gui, Add, CheckBox, gChangeGridVisible visGridVisible, Show the grid
+Gui, Add, CheckBox, h35 gChangeGridVisible visGridVisible, Show the grid
 Gui, Add, Text, , Grid opacity :
-Gui, Add, Slider, gChangeOpacity vgridOpacity Range-1-255, 50
+Gui, Add, Slider, gChangeOpacity vgridOpacity Range1-255, 50
 Gui, Add, Button, gHide w120, Hide this window
 Gui, Add, Button, w55 h50 vstartButton, Start
+Gui, Add, Link, , <a href="https://github.com/CodyAdam/Dofus-HDV">Github.com/CodyAdam</a>
 GuiControlGet, startPos, Pos, startButton
 Gui, Add, Button, y%startPosY% x75 w55 h50, Stop
 
@@ -23,7 +25,9 @@ GuiControl, , isGridVisible, %isGridVisible%
 IniRead, gridOpacity, settings.ini, Grid, gridOpacity
 GuiControl, , gridOpacity, %gridOpacity%
 
-;Keybinds
+; #################################################################
+; Keybinds
+
 Gui, Font, Bold
 Gui, Add, Text, x140 y10, Keybinds
 Gui, Font, Norm
@@ -52,6 +56,7 @@ GuiControl, , stopHK, %stopHK%
 
 ;Divider
 Gui, Add, Text, x10 w250   h1  0x5
+; #################################################################
+; Selections
 
-;Buttons
-Gui, Show, x0 y0 w270 h500
+Gui, Show, x0 y0 w270 h280

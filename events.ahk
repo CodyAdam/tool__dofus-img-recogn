@@ -6,8 +6,8 @@ return
 
 ChangeOpacity:
     GuiControlGet, gridOpacity, Core:, gridOpacity
-    IniWrite, %gridOpacity%, settings.ini, Grid, gridOpacity
-    WinSet, TransColor, 00ff00 %gridOpacity%, Grid
+    IniWrite, %gridOpacity%, settings.ini, Grid, opacity
+    WinSet, TransColor, 00ff00 %gridOpacity%, %GridName%
 return
 
 ChangeKeybinds:
@@ -26,9 +26,9 @@ return
 ChangeGridVisible:
     GuiControlGet, isGridVisible, Core:, isGridVisible
     IniWrite, %isGridVisible%, settings.ini, Grid, visible
-    if isGridVisible
-        Gui, Grid:Show
-    else
+    if isGridVisible {
+        ShowGrid()
+    } else
         Gui, Grid:Hide
 return
 
@@ -41,8 +41,11 @@ GridGuiSize:
     ToolTip, Timed ToolTip`n Resizing!
     SetTimer, RemoveToolTip, -1000
     GuiControl, Move, img, % "W" . A_GuiWidth . " H" . A_GuiHeight
-    IniWrite, %A_GuiWidth%, settings.ini, Grid, gridWidth
-    IniWrite, %A_GuiHeight%, settings.ini, Grid, gridHeight
+    WinGetPos, guiX, guiY, guiWidth, guiHeight, %GridName%
+    IniWrite, %A_GuiWidth%, settings.ini, Grid, width
+    IniWrite, %A_GuiHeight%, settings.ini, Grid, height
+    IniWrite, %guiX%, settings.ini, Grid, x
+    IniWrite, %guiY%, settings.ini, Grid, y
     WinSet redraw
 return
 
