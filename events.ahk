@@ -1,4 +1,13 @@
 
+Capture:
+    index := 1
+    WinGetPos, guiX, guiY, guiW, guiH, %GridName%
+    pos := guiX . "|" . guiY . "|" . guiW . "|" . guiH
+    snap := Gdip_BitmapFromScreen(pos)
+    returned :=Gdip_SaveBitmapToFile(snap, "temp/shot_" . index . ".png")
+    Gdip_DisposeImage(snap)
+return
+
 ChangeServer:
     GuiControlGet, server, Core:, server
     IniWrite, %server%, settings.ini, Server, server
@@ -41,7 +50,7 @@ GridGuiSize:
     ToolTip, Timed ToolTip`n Resizing!
     SetTimer, RemoveToolTip, -1000
     GuiControl, Move, img, % "W" . A_GuiWidth . " H" . A_GuiHeight
-    WinGetPos, guiX, guiY, guiWidth, guiHeight, %GridName%
+    WinGetPos, guiX, guiY, , , %GridName%
     IniWrite, %A_GuiWidth%, settings.ini, Grid, width
     IniWrite, %A_GuiHeight%, settings.ini, Grid, height
     IniWrite, %guiX%, settings.ini, Grid, x
@@ -54,6 +63,7 @@ RemoveToolTip:
 return
 
 CoreGuiClose:
+    Gdip_Shutdown(pToken)
     ExitApp
 return
 

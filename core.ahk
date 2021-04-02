@@ -13,7 +13,7 @@ Gui, Add, CheckBox, h35 gChangeGridVisible visGridVisible, Show the grid
 Gui, Add, Text, , Grid opacity :
 Gui, Add, Slider, gChangeOpacity vgridOpacity Range1-255, 50
 Gui, Add, Button, gHide w120, Hide this window
-Gui, Add, Button, w55 h50 vstartButton, Start
+Gui, Add, Button, gCapture w55 h50 vstartButton, Start
 Gui, Add, Link, , <a href="https://github.com/CodyAdam/Dofus-HDV">Github.com/CodyAdam</a>
 GuiControlGet, startPos, Pos, startButton
 Gui, Add, Button, y%startPosY% x75 w55 h50, Stop
