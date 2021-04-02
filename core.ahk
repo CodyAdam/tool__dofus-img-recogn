@@ -19,11 +19,14 @@ GuiControlGet, startPos, Pos, startButton
 Gui, Add, Button, y%startPosY% x75 w55 h50, Stop
 
 IniRead, server, settings.ini, Server, server
+server := (server == "ERROR") ? "Temporis 1" : server
 GuiControl, ChooseString, server, %server%
 IniRead, isGridVisible, settings.ini, Grid, visible
+isGridVisible := (isGridVisible == "ERROR") ? 1 : isGridVisible
 GuiControl, , isGridVisible, %isGridVisible%
-IniRead, gridOpacity, settings.ini, Grid, gridOpacity
-GuiControl, , gridOpacity, %gridOpacity%
+IniRead, opacity, settings.ini, Grid, opacity
+opacity := (opacity == "ERROR") ? 100 : opacity
+GuiControl, , gridOpacity, %opacity%
 
 ; #################################################################
 ; Keybinds

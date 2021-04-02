@@ -10,6 +10,5 @@ if isGridVisible {
 } else
     Gui, Hide
 
-IniRead, opacity, settings.ini, Grid, opacity
-opacity := (opacity == "ERROR") ? 100 : opacity
+GuiControlGet, opacity, Core:, gridOpacity
 WinSet, TransColor, 00ff00 %opacity%, %GridName%
