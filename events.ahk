@@ -1,11 +1,11 @@
+OnStart:
+    canLoop := True
+    loop()
+return
 
-Capture:
-    index := 1
-    WinGetPos, guiX, guiY, guiW, guiH, %GridName%
-    pos := guiX . "|" . guiY . "|" . guiW . "|" . guiH
-    snap := Gdip_BitmapFromScreen(pos)
-    returned :=Gdip_SaveBitmapToFile(snap, "temp/shot_" . index . ".png")
-    Gdip_DisposeImage(snap)
+OnStop:
+    canLoop := False
+    GuiControl, Text, status, Process stoped`nWaiting for user`nactions
 return
 
 ChangeServer:

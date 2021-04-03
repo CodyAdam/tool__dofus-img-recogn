@@ -9,6 +9,9 @@ ShowGrid()
     } else {
         Gui, Grid:Show, x%gridX% y%gridY% h%gridHeight% w%gridWidth%
     }
+    GuiControlGet, opacity, Core:, gridOpacity
+    global GridName
+    WinSet, TransColor, 00ff00 %opacity%, %GridName%
 }
 
 

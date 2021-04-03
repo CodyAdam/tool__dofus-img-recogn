@@ -15,3 +15,5 @@ If !(A_PtrSize = 4){
 }
 
 pToken := Gdip_Startup()
+
+canLoop := True

@@ -13,5 +13,3 @@ if isGridVisible {
 } else
     Gui, Hide
 
-GuiControlGet, opacity, Core:, gridOpacity
-WinSet, TransColor, 00ff00 %opacity%, %GridName%

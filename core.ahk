@@ -9,14 +9,17 @@ Gui, Add, Text, x10 y10, Settings
 Gui, Font, Norm
 
 Gui, Add, DropDownList, gChangeServer vserver, Temporis 1|Temporis 2|Temporis 3|Temporis 4|Temporis 5
-Gui, Add, CheckBox, h35 gChangeGridVisible visGridVisible, Show the grid
+Gui, Add, CheckBox, h25 gChangeGridVisible visGridVisible, Show the grid
 Gui, Add, Text, , Grid opacity :
-Gui, Add, Slider, gChangeOpacity vgridOpacity Range1-255, 50
-Gui, Add, Button, gHide w120, Hide this window
-Gui, Add, Button, gCapture w55 h50 vstartButton, Start
-Gui, Add, Link, , <a href="https://github.com/CodyAdam/Dofus-HDV">Github.com/CodyAdam</a>
+Gui, Add, Slider, h20 gChangeOpacity vgridOpacity Range1-255, 50
+Gui, Add, Button, gHide h20 w120, Hide this window
+Gui, Add, Button, gOnStart w55 h30 vstartButton, Start
+Gui, Font, Bold
+Gui, Add, Text, w120 h40 cGreen Center vstatus, Waiting for user actions...
+Gui, Font, Norm
+Gui, Add, Link,, <a href="https://github.com/CodyAdam/Dofus-HDV">Github.com/CodyAdam</a>
 GuiControlGet, startPos, Pos, startButton
-Gui, Add, Button, y%startPosY% x75 w55 h50, Stop
+Gui, Add, Button, gOnStop y%startPosY% x75 w55 h30, Stop
 
 IniRead, server, settings.ini, Server, server
 server := (server == "ERROR") ? "Temporis 1" : server
