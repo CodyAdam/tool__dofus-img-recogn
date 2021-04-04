@@ -1,8 +1,8 @@
 loop(){
     global canLoop
-    GuiControl, Core:Text, status, Processing...
-    BlockInput, MouseMove
-
+    GuiControl, Core:Text, status, Starting the analysis
+    CoordMode, Mouse, Screen
+    ;BlockInput, MouseMove
 
     
     if !getGridPos(gridX, gridY, gridW, gridH) { 
@@ -12,31 +12,30 @@ loop(){
         return
     }    
 
-    ; Sleep, 2000
-    ; getMouseInGrid(_, _, xp, yp)
-    ; Clipboard := (xp . ", " . yp)
+    ; Sleep, 1000
+    ; getMouseInGrid(mx, my, xp, yp)
+    ; Sleep, 1000
+    ; PixelGetColor, color, mx, my
+    ; Clipboard := xp . ", " . yp . "    " . color 
 
-    CoordMode, Click, Screen
-    getPosFromPercent(x, y, 0.9725, 0.1731) 
+    checkAll()
+
+    getPosFromPercent(x, y, 0.987640, 0.174877)
     Click, %x% %y%
     Sleep, 100
 
-    getPosFromPercent(x1, y1, 0.344408, 0.299031) 
-    PixelGetColor, px1, x1, y1
-    getPosFromPercent(x2, y2, 0.920266, 0.188862) 
-    PixelGetColor, px2, x2, y2
-    getPosFromPercent(x3, y3, 0.347730, 0.417676) 
-    PixelGetColor, px3, x3, y3
-    getPosFromPercent(x4, y4, 0.337763, 0.192494) 
-    PixelGetColor, px4, x4, y4
+    getPosFromPercent(x1, y1, 0.932584, 0.198276) 
+    getPosFromPercent(x2, y2, 0.379775, 0.198276) 
+    getPosFromPercent(x3, y3, 0.931461, 0.365764) 
+    getPosFromPercent(x4, y4, 0.924719, 0.307882) 
 
     waitIndex := 0
+    maxWaitIndex := 10
     captureIndex := 0
-    ; pos := gridX . "|" . gridY . "|" . gridW . "|" . gridH
-    ; capture(pos, index)
+    capture(captureIndex)
     SendInput, {PgDn}
-    While, ( waitIndex < 40 and canLoop) {
-        Sleep, 30
+    While, ( waitIndex < maxWaitIndex and canLoop) {
+        Sleep, 100
         waitIndex := waitIndex +1 
         PixelGetColor, px1check, x1, y1
         PixelGetColor, px2check, x2, y2
@@ -51,41 +50,46 @@ loop(){
             px2 := px2check 
             px3 := px3check
             px4 := px4check
-            ; pos := gridX . "|" . gridY . "|" . gridW . "|" . grid
-            ; capture(pos, captureIndex)
+            capture(captureIndex)
             SendInput, {PgDn}
-            GuiControl, Core:Text, status, Scrolling down...
         }
+        GuiControl, Core:Text, status, Processing please wait... (Capture:%captureIndex%) (Stop:%waitIndex%/%maxWaitIndex%)
     }
-
     BlockInput, MouseMoveOff
     GuiControl, Core:Text, status, Finished successfully! %index%
 }
 
+checkAll(){
+    ;TODO
+    return
+}
+
 
 getGridPos(ByRef x, ByRef y, ByRef w, ByRef h){
-    iniRead, gridW, settings.ini, Grid, width
-    IniRead, gridH, settings.ini, Grid, height
     IniRead, gridX, settings.ini, Grid, x
     IniRead, gridY, settings.ini, Grid, y
+    iniRead, gridW, settings.ini, Grid, width
+    IniRead, gridH, settings.ini, Grid, height
     if (gridX == "ERROR" or gridY == "ERROR" or gridH == "ERROR" or gridW == "ERROR") {
         return False
     } else {
-        global GridName
-        WinGetPos, guiX, guiY, guiW, guiH, %GridName% ; TODO change if window is hidden
-        x := guiX + 7
-        y := guiY + 7
-        w := guiW - 14
-        h := guiH - 14
+        x := gridX + 7
+        y := gridY + 7
+        w := gridW - 14
+        h := gridH - 14
         return True
     }
 }
 
 getPosFromPercent(ByRef x, ByRef y, xp, yp){
-    getGridPos( guiX, guiY, guiW, guiH) 
-    x := Floor(guiX + xp * guiW)
-    y := Floor(guiY + yp * guiH)
-    return
+    if getGridPos( guiX, guiY, guiW, guiH) {
+        x := Floor(guiX + xp * guiW)
+        y := Floor(guiY + yp * guiH)
+        return True
+    } else {
+        MsgBox, getPosFromPercent() called but grid pos not found! 
+        return False
+    }
 }
 
 getMouseInGrid(ByRef x, ByRef y, ByRef xp, ByRef yp) {
@@ -99,8 +103,12 @@ getMouseInGrid(ByRef x, ByRef y, ByRef xp, ByRef yp) {
     return
 }
 
-capture(pos, index){
+capture(index){
+    getGridPos(gridX, gridY, gridW, gridH)
+    getPosFromPercent(x1, y1, 0.319101, 0.167488)
+    getPosFromPercent(x2, y2, 0.992135, 0.958128)
+    pos := x1 . "|" . y1 . "|" x2-x1 . "|" . y2-y1
     snap := Gdip_BitmapFromScreen(pos)
-    returned :=Gdip_SaveBitmapToFile(snap, "temp/shot_" . index . ".png")
+    returned :=Gdip_SaveBitmapToFile(snap, "temp/" . index . ".png")
     Gdip_DisposeImage(snap)
 }
