@@ -105,8 +105,8 @@ getMouseInGrid(ByRef x, ByRef y, ByRef xp, ByRef yp) {
 
 capture(index){
     getGridPos(gridX, gridY, gridW, gridH)
-    getPosFromPercent(x1, y1, 0.319101, 0.167488)
-    getPosFromPercent(x2, y2, 0.992135, 0.958128)
+    getPosFromPercent(x1, y1, 0.319411, 0.16898)
+    getPosFromPercent(x2, y2, 0.993445, 0.960438)
     pos := x1 . "|" . y1 . "|" x2-x1 . "|" . y2-y1
     snap := Gdip_BitmapFromScreen(pos)
     returned :=Gdip_SaveBitmapToFile(snap, "temp/" . index . ".png")
