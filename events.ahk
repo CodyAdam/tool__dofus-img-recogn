@@ -49,7 +49,7 @@ return
 GridGuiSize:
     ToolTip, Timed ToolTip`n Resizing!
     SetTimer, RemoveToolTip, -1000
-    GuiControl, Move, img, % "W" . A_GuiWidth . " H" . A_GuiHeight
+    GuiControl, Grid:Move, img, % "W" . A_GuiWidth . " H" . A_GuiHeight
     WinGetPos, guiX, guiY, , , %GridName%
     IniWrite, %A_GuiWidth%, settings.ini, Grid, width
     IniWrite, %A_GuiHeight%, settings.ini, Grid, height

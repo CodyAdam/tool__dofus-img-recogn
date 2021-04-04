@@ -1,17 +1,16 @@
 loop(){
     global canLoop
-    GuiControl, Text, status, Processing...
+    GuiControl, Core:Text, status, Processing...
     BlockInput, MouseMove
 
+
     
-    ;getGridPos( guiX, guiY, guiW, guiH)
-    ; index := 1
-    ; pos := guiX . "|" . guiY . "|" . guiW . "|" . guiH
-    ; While, (index <= 10 and canLoop) {
-    ;     GuiControl, Text, status, Writing index %index%
-    ;     capture(pos, index)
-    ;     index := index + 1
-    ; }
+    if !getGridPos(gridX, gridY, gridW, gridH) { 
+        BlockInput, MouseMoveOff
+        MsgBox, Beforehand, you need to choose the position of the grid!
+        GuiControl, Core:Text, status, Beforehand, you need to choose the position of the grid!
+        return
+    }    
 
     ; Sleep, 2000
     ; getMouseInGrid(_, _, xp, yp)
@@ -32,6 +31,9 @@ loop(){
     PixelGetColor, px4, x4, y4
 
     waitIndex := 0
+    captureIndex := 0
+    ; pos := gridX . "|" . gridY . "|" . gridW . "|" . gridH
+    ; capture(pos, index)
     SendInput, {PgDn}
     While, ( waitIndex < 40 and canLoop) {
         Sleep, 30
@@ -44,30 +46,39 @@ loop(){
             waitIndex := waitIndex + 1
         } else {
             waitIndex := 0
+            captureIndex := captureIndex + 1
             px1 := px1check
             px2 := px2check 
             px3 := px3check
             px4 := px4check
+            ; pos := gridX . "|" . gridY . "|" . gridW . "|" . grid
+            ; capture(pos, captureIndex)
             SendInput, {PgDn}
-            GuiControl, Text, status, Scrolling down...
+            GuiControl, Core:Text, status, Scrolling down...
         }
     }
 
-
-
     BlockInput, MouseMoveOff
-    GuiControl, Text, status, Finished successfully! %index%
+    GuiControl, Core:Text, status, Finished successfully! %index%
 }
 
 
 getGridPos(ByRef x, ByRef y, ByRef w, ByRef h){
-    global GridName
-    WinGetPos, guiX, guiY, guiW, guiH, %GridName% ; TODO change if window is hidden
-    x := guiX + 7
-    y := guiY + 7
-    w := guiW - 14
-    h := guiH - 14
-    return
+    iniRead, gridW, settings.ini, Grid, width
+    IniRead, gridH, settings.ini, Grid, height
+    IniRead, gridX, settings.ini, Grid, x
+    IniRead, gridY, settings.ini, Grid, y
+    if (gridX == "ERROR" or gridY == "ERROR" or gridH == "ERROR" or gridW == "ERROR") {
+        return False
+    } else {
+        global GridName
+        WinGetPos, guiX, guiY, guiW, guiH, %GridName% ; TODO change if window is hidden
+        x := guiX + 7
+        y := guiY + 7
+        w := guiW - 14
+        h := guiH - 14
+        return True
+    }
 }
 
 getPosFromPercent(ByRef x, ByRef y, xp, yp){
