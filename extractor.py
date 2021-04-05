@@ -9,8 +9,8 @@ WP_NAME = 0.36212
 HP_NAME = 0.46667
 
 
-def ocr_get(img):
-    TEMP_FILE = "./ocr/ocr.png"
+def ocr_get(filename, img):
+    TEMP_FILE = f"./temp/ocr/{filename}.png"
     cv2.imwrite(TEMP_FILE, img)
     config = "-c page_separator=\"\" -c tessedit_char_whitelist=\"\'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -\" -l eng"
     output = os.popen(
@@ -18,31 +18,36 @@ def ocr_get(img):
     return output.replace('\n', '')
 
 
-def img_crop_p(img, W, H, xp, yp, wp, hp):
-    x = math.floor(xp * W)
-    y = math.floor(yp * H)
-    w = math.floor(wp * W)
-    h = math.floor(hp * H)
+def img_crop_p(img, W, H, pos):
+    x = math.floor(pos[0] * W)
+    y = math.floor(pos[1] * H)
+    w = math.floor(pos[2] * W)
+    h = math.floor(pos[3] * H)
     return img_line[y:y + h, x:x + w]
 
 
-img = cv2.imread("./temp/0.png")
+# TODO clear capture folders first before looping
+img = cv2.imread("./temp/captures/0.png")
+
 H = img.shape[0]
 W = img.shape[1]
-
 lineW = W
 lineH = H / LINE_COUNT
 
 data = dict()
 
 for i in range(0, LINE_COUNT):
+    item = dict()
     img_line = img[math.floor(lineH * i):math.floor(lineH * (i + 1)),
                    0:0 + lineW].copy()
+    cv2.imwrite("./temp/ocr/ref.png", img_line)
 
-    img_name = img_crop_p(img_line, lineW, lineH, XP_NAME, YP_NAME, WP_NAME,
-                          HP_NAME)
-    name = ocr_get(img_name)
-    img_category = 0
+    img_name = img_crop_p(img_line, lineW, lineH, NAME_POS)
+    item["name"] = ocr_get("name", img_name)
+    img_category = img_crop_p(img_line, lineW, lineH, CATEGORY_POS)
+    item["category"] = ocr_get("category", img_category)
     # cv2.imshow("img", img_name)
     # cv2.waitKey(0)
-    print(name)
+    # print(item["name"] + "  " + item["category"])
+    data[item["name"]] = item
+print(data)

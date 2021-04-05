@@ -109,6 +109,6 @@ capture(index){
     getPosFromPercent(x2, y2, 0.993445, 0.960438)
     pos := x1 . "|" . y1 . "|" x2-x1 . "|" . y2-y1
     snap := Gdip_BitmapFromScreen(pos)
-    returned :=Gdip_SaveBitmapToFile(snap, "temp/" . index . ".png")
+    returned :=Gdip_SaveBitmapToFile(snap, "temp/captures/" . index . ".png")
     Gdip_DisposeImage(snap)
 }
