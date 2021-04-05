@@ -2,7 +2,6 @@ import cv2
 import math
 import os
 
-
 LINE_COUNT = 14
 XP_NAME = 0.07475
 YP_NAME = 0.26667
@@ -24,7 +23,7 @@ def img_crop_p(img, W, H, xp, yp, wp, hp):
     y = math.floor(yp * H)
     w = math.floor(wp * W)
     h = math.floor(hp * H)
-    return img_line[y:y+h, x:x+w]
+    return img_line[y:y + h, x:x + w]
 
 
 img = cv2.imread("./temp/0.png")
@@ -37,12 +36,13 @@ lineH = H / LINE_COUNT
 data = dict()
 
 for i in range(0, LINE_COUNT):
-    img_line = img[math.floor(
-        lineH * i):math.floor(lineH * (i+1)), 0:0+lineW].copy()
+    img_line = img[math.floor(lineH * i):math.floor(lineH * (i + 1)),
+                   0:0 + lineW].copy()
 
-    img_name = img_crop_p(img_line, lineW, lineH, XP_NAME,
-                          YP_NAME, WP_NAME, HP_NAME)
+    img_name = img_crop_p(img_line, lineW, lineH, XP_NAME, YP_NAME, WP_NAME,
+                          HP_NAME)
+    name = ocr_get(img_name)
+    img_category = 0
     # cv2.imshow("img", img_name)
     # cv2.waitKey(0)
-    name = ocr_get(img_name)
     print(name)
