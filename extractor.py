@@ -3,10 +3,8 @@ import math
 import os
 
 LINE_COUNT = 14
-XP_NAME = 0.07475
-YP_NAME = 0.26667
-WP_NAME = 0.36212
-HP_NAME = 0.46667
+NAME_POS = [0.07475, 0.26667, 0.36212, 0.46667]
+CATEGORY_POS = [0.4485, 0.28260, 0.21926, 0.47826]
 
 
 def ocr_get(filename, img):
