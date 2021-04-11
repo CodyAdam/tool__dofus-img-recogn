@@ -1,6 +1,8 @@
 import cv2
 import math
 import os
+import json
+import time
 
 LINE_COUNT = 14
 NAME_POS = [0.07475, 0.26667, 0.36212, 0.46667]
@@ -10,9 +12,8 @@ CATEGORY_POS = [0.4485, 0.28260, 0.21926, 0.47826]
 def ocr_get(filename, img):
     TEMP_FILE = f"./temp/ocr/{filename}.png"
     cv2.imwrite(TEMP_FILE, img)
-    config = "-c page_separator=\"\" -c tessedit_char_whitelist=\"\'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -\" -l eng"
-    output = os.popen(
-        f'tesseract {TEMP_FILE} stdout --dpi 140 {config}').read()
+    config = "--psm 7 --dpi 140 -c page_separator=\"\" -c tessedit_char_whitelist=\"\'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -\" -l eng"
+    output = os.popen(f'tesseract {TEMP_FILE} stdout  {config}').read()
     return output.replace('\n', '')
 
 
@@ -34,6 +35,7 @@ lineH = H / LINE_COUNT
 
 data = dict()
 
+start = time.time()
 for i in range(0, LINE_COUNT):
     item = dict()
     img_line = img[math.floor(lineH * i):math.floor(lineH * (i + 1)),
@@ -48,4 +50,7 @@ for i in range(0, LINE_COUNT):
     # cv2.waitKey(0)
     # print(item["name"] + "  " + item["category"])
     data[item["name"]] = item
-print(data)
+print(str(time.time() - start))
+
+with open('data.json', 'w') as outfile:
+    json.dump(data, outfile, indent=4)
