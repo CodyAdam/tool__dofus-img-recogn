@@ -1,58 +1,72 @@
 {
-    "Snoowolf Skin": {
-        "name": "Snoowolf Skin",
-        "category": "Skin"
-    },
-    "Amber": {
-        "name": "Amber",
-        "category": "Precious stone"
-    },
-    "Baker's Yeast": {
-        "name": "Baker's Yeast",
-        "category": "Powder"
-    },
-    "Bwork Archer Briefs": {
-        "name": "Bwork Archer Briefs",
-        "category": "Garment"
-    },
-    "Chafer Archer Arrow": {
-        "name": "Chafer Archer Arrow",
-        "category": "Miscellaneous -"
-    },
-    "Explosive Capsule": {
-        "name": "Explosive Capsule",
-        "category": "Miscellaneous"
-    },
-    "Rib Chops": {
-        "name": "Rib Chops",
-        "category": "Bone"
-    },
-    "Slimy Scale": {
-        "name": "Slimy Scale",
-        "category": "Skin"
-    },
-    "Suspicious Pouch": {
-        "name": "Suspicious Pouch",
-        "category": "Miscellaneous -"
-    },
-    "Wabbit Teeth": {
-        "name": "Wabbit Teeth",
-        "category": "Bone"
-    },
-    "Black Wabbit Paw": {
-        "name": "Black Wabbit Paw",
-        "category": "Leg"
-    },
-    "Broken Helmet": {
-        "name": "Broken Helmet",
-        "category": "Garment"
-    },
-    "Cashew Nut": {
-        "name": "Cashew Nut",
-        "category": "Seed"
-    },
-    "Dragoturkey Sweat": {
-        "name": "Dragoturkey Sweat",
-        "category": "Liquid"
-    }
+  "Aile de Bourdard": {
+    "name": "Aile de Bourdard",
+    "category": "Aile",
+    "price": 187
+  },
+  "Aile du Tofu Malefique": {
+    "name": "Aile du Tofu Malefique",
+    "category": "Aile",
+    "price": 87
+  },
+  "Ailes cassees": {
+    "name": "Ailes cassees",
+    "category": "Aile",
+    "price": 64
+  },
+  "Ailes de Moskito": {
+    "name": "Ailes de Moskito",
+    "category": "Aile",
+    "price": 175
+  },
+  "Ailes de Scarafeuille Blanc": {
+    "name": "Ailes de Scarafeuille Blanc",
+    "category": "Aile",
+    "price": 208
+  },
+  "Ailes de Scarafeuille Bleu": {
+    "name": "Ailes de Scarafeuille Bleu",
+    "category": "Aile",
+    "price": 49
+  },
+  "Ailes de Scarafeuille Rouge": {
+    "name": "Ailes de Scarafeuille Rouge",
+    "category": "Aile",
+    "price": 32
+  },
+  "Ailes de Scarafeuille Vert": {
+    "name": "Ailes de Scarafeuille Vert",
+    "category": "Aile",
+    "price": 147
+  },
+  "Ailes du Scarabosse Dore": {
+    "name": "Ailes du Scarabosse Dore",
+    "category": "Aile",
+    "price": 132
+  },
+  "Ailes du Scarafeuille Noir": {
+    "name": "Ailes du Scarafeuille Noir",
+    "category": "Aile",
+    "price": 772
+  },
+  "Aluminite": {
+    "name": "Aluminite",
+    "category": "Alliage",
+    "price": 811
+  },
+  "Ebonite": {
+    "name": "Ebonite",
+    "category": "Alliage",
+    "price": 2569
+  },
+  "Ferrite": {
+    "name": "Ferrite",
+    "category": "Alliage",
+    "price": 15
+  },
+  "Magnsite": {
+    "name": "Magnsite",
+    "category": "Alliage",
+    "price": 3003
+  }
 }
