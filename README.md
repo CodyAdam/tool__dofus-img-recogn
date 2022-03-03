@@ -1,3 +1,4 @@
+
 # What is this ?
 
 This is an image recognition based data sniffer for the game Dofus. It read a large amount of data using [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) to then generate a JSON containing all the captured data.  
@@ -26,3 +27,8 @@ The program then generate a `data.json` that sums up all the values.
 - You have to launch the AHK script using AHK 32 bits executable. (64 bits is not compatible with Gdip)
 - For the OCR to work, you need to use the following HUD theme : `Xelorium`
 ![Theme](Theme.png)
+
+# Requirements
+- python
+- auto hotkey 32bits
+- tesseract
